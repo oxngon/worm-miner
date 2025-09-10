@@ -15,12 +15,13 @@ required for rapidsnark later:
 
 
 ```bash
-sudo apt install -y libgmp-dev libsodium-dev nasm curl m4 nlohmann-json3-dev
+sudo apt install -y libgmp-dev libomp-dev libsodium-dev nasm m4 nlohmann-json3-dev
 ```
 
 Verify
 
 ```bash
+dpkg -l | grep libomp-dev
 pkg-config --modversion gmp      # e.g., 6.3.0
 pkg-config --modversion libsodium  # e.g., 1.0.18
 pkg-config --modversion libomp   # e.g., 18.1.3
@@ -31,6 +32,7 @@ Install rust and cargo
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source $HOME/.cargo/env
+echo 'source $HOME/.cargo/env' >> ~/.bashrc
 ```
 
 Verify
