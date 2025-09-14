@@ -134,7 +134,16 @@ worm-miner info --network sepolia --private-key 0x_YOUR_PRIV_KEY
 
 ## BONUS 🪱🪱
 
-Automatic sepolia ETH --> BETH burning:
+Automatic sepolia ETH --> BETH burning
 ```bash
-curl -sSL https://raw.githubusercontent.com/oxngon/worm-miner/refs/heads/main/auto-ethburner.sh | bash
+curl -sSL https://raw.githubusercontent.com/oxngon/worm-miner/main/auto-ethburner.sh -o auto-ethburner.sh && chmod +x auto-ethburner.sh
+```
+Usage
+
+```bash
+<private_key> <eth_per_burn> <total_loops>
+```
+E.g.
+```bash
+./auto-ethburner.sh 0x_your_private_key_here 1 5
 ```
