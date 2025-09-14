@@ -6,8 +6,8 @@ Ref (official guide): https://github.com/worm-privacy/shaihulud
 
 ## preparation
 
-- Use machine with min 32GB RAM (official guide suggests 16 but I've had miner fail generating proofs with less)
-- Strong enough CPU, 4 cores (I use Ryzen 7)
+- Use machine with 32+GB RAM (official guide suggests 16 but I've had miner fail generating proofs with less)
+- Strong enough CPU, 4+ cores (I use Ryzen 7)
 - Sepolia ETH (get from faucets or buy)
 
 ## update and install basic dependencies & tools
