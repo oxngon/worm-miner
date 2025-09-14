@@ -14,7 +14,7 @@ Ref (official guide): https://github.com/worm-privacy/shaihulud
 
 ```bash
 apt update && apt upgrade -y
-apt install -y htop sudo tmux curl wget vim git make build-essential unzip cmake
+apt install -y htop sudo tmux curl wget vim git make build-essential unzip cmake bc
 ```
 
 ## Install rust and cargo
@@ -136,5 +136,5 @@ worm-miner info --network sepolia --private-key 0x_YOUR_PRIV_KEY
 
 Automatic sepolia ETH --> BETH burning:
 ```bash
-BASH
+curl -sSL https://raw.githubusercontent.com/oxngon/worm-miner/refs/heads/main/auto-ethburner.sh | bash
 ```
