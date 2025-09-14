@@ -141,7 +141,7 @@ curl -sSL https://raw.githubusercontent.com/oxngon/worm-miner/main/auto-ethburne
 Usage
 
 ```bash
-<private_key> <eth_per_burn> <total_loops>
+./auto-ethburner.sh <private_key> <eth_per_burn> <total_loops>
 ```
 E.g.
 ```bash
