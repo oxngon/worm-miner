@@ -15,10 +15,8 @@ validate_number() {
 
 # Check for cli args
 if [ $# -ne 3 ]; then
+  echo "WARNING: Run in a secure environment to protect your private key, do not share with priv key!"
   echo "Usage: $0 <private_key> <eth_per_burn> <total_loops>"
-  echo "Example: $0 0x123...456 1 5"
-  echo "WARNING: Do not hardcode your private key in scripts or share it!"
-  echo "Run in a secure environment to protect your private key."
   exit 1
 fi
 
