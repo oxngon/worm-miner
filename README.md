@@ -85,8 +85,6 @@ Verify
 pkg-config --modversion openssl  # e.g., 3.0.13
 pkg-config --libs openssl        # e.g., -lssl -lcrypto
 pkg-config --cflags openssl      # e.g., -I/usr/include/x86_64-linux-gnu/openssl
-ls $OPENSSL_INCLUDE_DIR/openssl.h  # Should exist
-ls $OPENSSL_LIB_DIR/libssl.so     # Should exist
 ```
 
 ## Install libclang and clang
@@ -134,7 +132,9 @@ Follow [official guide](https://github.com/worm-privacy/shaihulud) for burn, par
 worm-miner info --network sepolia --private-key 0x_YOUR_PRIV_KEY
 ```
 
-For automatic sepolia ETH burning script:
+## BONUS 🪱🪱
+
+Automatic sepolia ETH --> BETH burning:
 ```bash
 BASH
 ```
