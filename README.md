@@ -1,33 +1,23 @@
-# worm miner workflow
+# worm miner setup workflow
 
-  - helps start with worm miner
+This is workflow to set up Shai-Hulud worm miner on fresh Ubuntu server
 
-## quick start
+Ref (official guide): https://github.com/worm-privacy/shaihulud
 
-update and install dependencies:
+## preparation
+
+- Use machine with min 32GB RAM (official guide suggests 16 but I've had miner fail generating proofs with less)
+- Strong enough CPU, 4 cores (I use Ryzen 7)
+- Sepolia ETH (get from faucets or buy)
+
+## update and install basic dependencies & tools
 
 ```bash
 apt update && apt upgrade -y
 apt install -y htop sudo tmux curl wget vim git make build-essential unzip cmake
 ```
 
-required for rapidsnark later:
-
-
-```bash
-sudo apt install -y libgmp-dev libomp-dev libsodium-dev nasm m4 nlohmann-json3-dev
-```
-
-Verify
-
-```bash
-dpkg -l | grep libomp-dev
-pkg-config --modversion gmp      # e.g., 6.3.0
-pkg-config --modversion libsodium  # e.g., 1.0.18
-pkg-config --modversion libomp   # e.g., 18.1.3
-```
-
-Install rust and cargo
+## Install rust and cargo
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -42,7 +32,7 @@ rustc --version
 cargo --version
 ```
 
-Install pkg-config
+## Install pkg-config
 
 ```bash
 apt install -y pkg-config
@@ -56,7 +46,22 @@ echo $PATH        # Ensure /usr/bin is included
 pkg-config --version  # e.g., 1.8.1
 ```
 
-Install OpenSSL libraries (with headers)
+## Install rapidsnark dependencies
+
+```bash
+sudo apt install -y libgmp-dev libomp-dev libsodium-dev nasm m4 nlohmann-json3-dev
+```
+
+Verify
+
+```bash
+dpkg -l | grep libomp-dev
+pkg-config --modversion gmp      # e.g., 6.3.0
+pkg-config --modversion libsodium  # e.g., 1.0.18
+pkg-config --modversion libomp   # e.g., 18.1.3
+```
+
+## Install OpenSSL libraries
 
 ```bash
 apt install -y libssl-dev
@@ -87,7 +92,7 @@ ls $OPENSSL_INCLUDE_DIR/openssl.h  # Should exist
 ls $OPENSSL_LIB_DIR/libssl.so     # Should exist
 ```
 
-Install libclang and clang, ensure PATH
+## Install libclang and clang
 
 ```bash
 apt install -y clang libclang-dev
@@ -111,7 +116,7 @@ ls $LIBCLANG_PATH/libclang.so  # Should exist
 which $CLANG_PATH  # Should output /usr/bin/clang-18
 ```
 
-Clone and set up worm
+## Clone and download worm miner params
 
 ```bash
 git clone https://github.com/worm-privacy/miner /miner
@@ -119,15 +124,20 @@ cd /miner
 make download_params
 ```
 
-Verify (optional)
-
-```bash
-ls -l /miner/rapidsnark-linux-x86_64-v0.0.7/{lib,include}  # Should show librapidsnark.so and prover.h
-```
-
-
-Build and install worm
+## Build and install worm
 
 ```bash
 cargo install --path .
+```
+
+## Finished! 🪱
+Follow [official guide](https://github.com/worm-privacy/shaihulud) for burn, participate and claim instructions.
+
+```bash
+worm-miner info --network sepolia --private-key 0x_YOUR_PRIV_KEY
+```
+
+For automatic sepolia ETH burning script:
+```bash
+BASH
 ```
