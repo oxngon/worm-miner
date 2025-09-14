@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # performs automatic ETH burns on the Sepolia network for worm-miner
+# Usage: curl -sSL https://raw.githubusercontent.com/oxngon/worm-miner/main/auto-ethburner.sh | bash -s <private_key> <eth_per_burn> <total_loops>
 
 # Validate numeric input
 validate_number() {
@@ -12,23 +13,25 @@ validate_number() {
   fi
 }
 
-# Print security warning
-echo "WARNING: This script will prompt for your private key. Ensure this script is run in a secure environment."
+# Check for cli args
+if [ $# -ne 3 ]; then
+  echo "Usage: $0 <private_key> <eth_per_burn> <total_loops>"
+  echo "Example: $0 0x123...456 1 5"
+  echo "WARNING: Do not hardcode your private key in scripts or share it!"
+  echo "Run in a secure environment to protect your private key."
+  exit 1
+fi
 
-# Prompt for private key
-read -sp "Enter your Ethereum private key (input is hidden): " PRIVATE_KEY
-echo ""
+PRIVATE_KEY="$1"
+ETH_PER_BURN="$2"
+TOTAL_LOOPS="$3"
+
+# Validate inputs
 if [ -z "$PRIVATE_KEY" ]; then
   echo "Error: Private key cannot be empty."
   exit 1
 fi
-
-# Prompt for ETH per burn
-read -p "Enter the amount of ETH to burn per transaction (e.g., 1): " ETH_PER_BURN
 validate_number "$ETH_PER_BURN" "ETH per burn"
-
-# Prompt for number of burns
-read -p "Enter the number of burns to perform: " TOTAL_LOOPS
 if ! [[ "$TOTAL_LOOPS" =~ ^[0-9]+$ ]]; then
   echo "Error: Number of burns must be a positive integer."
   exit 1
@@ -44,7 +47,7 @@ FEE=$(echo "$ETH_PER_BURN * 0.002" | bc)
 
 echo "Performing $TOTAL_LOOPS burns of $ETH_PER_BURN ETH each (spend: $SPEND ETH, fee: $FEE ETH per burn)..."
 
-# Loop for the specified number of burns with error handling
+# Loop for the specified number of burns
 for ((i=1; i<=TOTAL_LOOPS; i++))
 do
   echo "Burn #$i of $TOTAL_LOOPS..."
@@ -59,7 +62,7 @@ do
     exit 1
   fi
 
-  # Short buffer delay
+  # Buffer delay
   echo "Waiting 15 seconds before next burn..."
   sleep 15
 done
